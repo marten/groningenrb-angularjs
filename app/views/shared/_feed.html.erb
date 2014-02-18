@@ -1,7 +1,9 @@
 <% if @feed_items.any? %>
-  <ol class="microposts" ng-controller="FeedCtrl" ng-init="feed_items = <%= @feed_items.as_json(include: :user).to_json %>">
+  <ol class="microposts" ng-controller="FeedCtrl" ng-init="feed_items = <%= ActiveModel::ArraySerializer.new(@feed_items).to_json %>">
     <li ng-repeat="feed_item in feed_items" id="{{ feed_item.id }}">
-      <a href="/users/{{feed_item.user.id}}">TODO GRAVATAR</a>
+      <a href="/users/{{feed_item.user.id}}">
+        <img class="gravatar" alt="{{ feed_item.user.name }}" src="{{ feed_item.user.gravatar_url }}" />
+      </a>
       <span class="user">
         <a href="/users/{{feed_item.user.id}}">{{ feed_item.user.name }}</a>
       </span>
