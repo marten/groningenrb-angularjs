@@ -4,6 +4,10 @@
 
 @flutter = angular.module('flutter', [])
 
+@flutter.filter 'timeAgo', ->
+  (date) ->
+    moment(date).fromNow()
+
 @flutter.controller 'FeedCtrl', ['$scope', ($scope) ->
 
 ]

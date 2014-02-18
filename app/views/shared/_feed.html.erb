@@ -7,7 +7,7 @@
       </span>
       <span class="content">{{ feed_item.content }}</span>
       <span class="timestamp">
-        Posted {{ feed_item.created_at }}.
+        Posted {{ feed_item.created_at | timeAgo }}.
       </span>
       <a ng-show="false"> TODO
         if current_user?(feed_item.user)
