@@ -1,8 +1,8 @@
 <% if @feed_items.any? %>
-  <ol class="microposts" ng-controller="FeedCtrl" ng-init="feed_items = <%= @feed_items.to_json %>">
     <% @feed_items.each do |feed_item| %>
     <li id="<%= feed_item.id %>">
       <%= link_to gravatar_for(feed_item.user), feed_item.user %>
+  <ol class="microposts" ng-controller="FeedCtrl" ng-init="feed_items = <%= @feed_items.as_json(include: :user).to_json %>">
       <span class="user">
         <%= link_to feed_item.user.name, feed_item.user %>
       </span>
