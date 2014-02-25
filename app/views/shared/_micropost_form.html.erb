@@ -1,7 +1,6 @@
-<%= form_for(@micropost) do |f| %>
-  <%= render 'shared/error_messages', object: f.object %>
+<form>
   <div class="field">
-    <%= f.text_area :content, placeholder: "Compose new micropost..." %>
+    <textarea placeholder="Compose new micropost..." ng-model="new_feed_item.content"></textarea>
   </div>
-  <%= f.submit "Post", class: "btn btn-large btn-primary" %>
-<% end %>
+  <input type="submit" value="Post" class="btn btn-large btn-primary" ng-click="createFeedItem(new_feed_item)" />
+</form>

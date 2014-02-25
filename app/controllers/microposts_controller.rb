@@ -4,12 +4,15 @@ class MicropostsController < ApplicationController
 
   def create
     @micropost = current_user.microposts.build(params[:micropost])
-    if @micropost.save
-      flash[:success] = "Micropost created!"
-      redirect_to root_url
-    else
-      @feed_items = []
-      render 'static_pages/home'
+    respond_to do |format|
+      if @micropost.save
+        flash[:success] = "Micropost created!"
+        format.html { redirect_to root_url }
+        format.json { render json: @micropost, status: :created, location: @micropost }
+      else
+        format.html { @feed_items = []; render 'static_pages/home' }
+        format.json { render json: @micropost.errors, status: :unprocessable_entity }
+      end
     end
   end
 

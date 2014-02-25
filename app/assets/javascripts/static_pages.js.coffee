@@ -14,6 +14,16 @@
     moment(date).fromNow()
 
 @flutter.controller 'FeedCtrl', ['$scope', '$http', ($scope, $http) ->
+  $scope.new_feed_item = {}
+
+  $scope.createFeedItem = (feed_item) ->
+    $http.post("/microposts.json", feed_item)
+      .success (created_item) ->
+        $scope.feed_items.unshift(created_item.micropost)
+        $scope.new_feed_item = {}
+      .error (data) ->
+        console.log(data)
+
   $scope.deleteFeedItem = (feed_item) ->
     $http.delete("/microposts/#{feed_item.id}.json").success ->
       $scope.feed_items.splice($scope.feed_items.indexOf(feed_item), 1);
