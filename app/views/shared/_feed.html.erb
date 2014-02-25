@@ -11,7 +11,7 @@
       <span class="timestamp">
         Posted {{ feed_item.created_at | timeAgo }}.
       </span>
-      <a ng-show="{{feed_item.deletable}}" href="/microposts/{{feed_item.id}}" data-confirm= "You sure?" data-method="delete" title="{{feed_item.content}}">
+      <a ng-show="{{feed_item.deletable}}" ng-click="deleteFeedItem(feed_item)" data-confirm= "You sure?" title="{{feed_item.content}}">
         delete
       </a>
     </li>
